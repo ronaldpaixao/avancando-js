@@ -5,12 +5,12 @@ class User {
     };
 
     greet() {
-        return `Olá, ${this.name}. Você tem ${this.age} anos.`;
+        console.log(`Olá, ${this.name}. Você tem ${this.age} anos.`);
     };
 };
 
 const user1 = new User('Pedro', 34);
-console.log(user1.greet());
 
 const user2 = new User('Ana', 98);
-console.log(user2.greet());
+
+const user3 = new User('Roni', 31);
