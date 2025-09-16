@@ -3,25 +3,25 @@ const student = {
     name: 'Artur',
     age: 22,
     course: 'Javascript',
-    present() {
+    introduce() {
         console.log(`Olá, meu nome é ${this.name} e eu estudo ${this.course}.`);
     }
 };
 
-student.present();
+student.introduce();
 
 // q3
 const book = {
     title: 'Atchim!',
     author: 'Miró',
     year: 2019,
-    isAvaliable: true,
-    toLend() {
-        return this.isAvaliable = false;
+    isAvailable: true,
+    checkOut() {
+        return this.isAvailable = false;
     }
 };
 
-console.log(book.toLend());
+console.log(book.checkOut());
 
 // q4
 const product = {
@@ -32,7 +32,7 @@ const product = {
         this.stock--;
         return this.stock;
     },
-    replacement() {
+    restock() {
         this.stock++;
         return this.stock;
     }
@@ -40,18 +40,18 @@ const product = {
 
 console.log(`Produto: ${product.name}. Valor: R$${product.price}. Quantidade estoque: ${product.stock}`);
 console.log(product.sell());
-console.log(product.replacement());
+console.log(product.restock());
 
 // q5
 const bankAccount = {
     holder: 'Fulando de Tal',
     balance: 5049,
-    toDeposite(value) {
+    deposit(value) {
         this.balance += value;
         console.log(`Adicionando R$${value}...`);
         return this.balance;
     },
-    toWithdraw(value) {
+    withdraw(value) {
         this.balance -= value;
         console.log(`Sacando R$${value}...`);
         return this.balance;
@@ -59,13 +59,21 @@ const bankAccount = {
 };
 
 console.log(bankAccount.balance);
-console.log(bankAccount.toDeposite(200));
-console.log(bankAccount.toWithdraw(200));
+console.log(bankAccount.deposit(200));
+console.log(bankAccount.withdraw(200));
 
 // q6
-/* const movie = {
-    title:
-    gender:
-    yearOfRelease:
-    review: 
-}; */
+const movie = {
+    title: 'Her',
+    genre: 'Sci-fi/Drama',
+    releaseYear: 2013,
+    ratings: [],
+    addRating(rating) {
+        this.ratings.push(rating);
+        console.log(`Adicionada a nota ${rating} ao filme ${this.title}.`);
+    }
+};
+
+movie.addRating(4.5);
+movie.addRating(6.3);
+console.log(movie.ratings);
