@@ -16,13 +16,39 @@ const gymClients = [
         name: 'Carla Flavia',
         plan: 'silver',
         isPaid: true
-    },   
+    },
 ]
-function listClients(){
-    let message = '';
-    for(client of gymClients) {
-        client.isPaid ? message = `[${client.plan}] ${client.name} - Pagamento em dia.`: message = `[${client.plan}] ${client.name} - Pagamento pendente.`;
-        console.log(message)
-    } 
+
+function listClients() {
+    for (client of gymClients) {
+        const statusMessage = client.isPaid ? ' - Pagamento em dia.' : ' - Pagamento pendente.'
+        const message = `[${client.plan.toUpperCase()}] ${client.name} ${statusMessage}`
+        console.log(message);
+    }
+};
+
+function findClient(id) {
+    let clientFinded = false;
+
+    for (client of gymClients) {
+        if (id === client.id) {
+            const statusMessage = client.isPaid ? ' - Pagamento em dia.' : ' - Pagamento pendente.';
+            console.log(`--- Ficha do Cliente ---`);
+            console.log(`ID: ${id}`);
+            console.log(`NOME: ${client.name}`);
+            console.log(`PLANO: ${client.plan}`);
+            console.log(`STATUS: ${statusMessage}`);
+            console.log('----------------------');
+
+            return clientFinded = true;
+        }
+    }
+    if (!clientFinded) {
+        console.log(`Usuário com ID ${id} não encontrado.`);
+    }
 }
+
+
 listClients();
+
+findClient(4);
