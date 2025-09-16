@@ -28,7 +28,7 @@ function listClients() {
 };
 
 function findClient(id) {
-    let clientFinded = false;
+    let clientFound = false;
 
     for (client of gymClients) {
         if (id === client.id) {
@@ -40,15 +40,30 @@ function findClient(id) {
             console.log(`STATUS: ${statusMessage}`);
             console.log('----------------------');
 
-            return clientFinded = true;
-        }
+            clientFound = true
+            return;
+        } 
     }
-    if (!clientFinded) {
+    if (!clientFound) {
         console.log(`Usuário com ID ${id} não encontrado.`);
     }
 }
 
+function addClient(name, plan = 'silver') {
+    const nextId = gymClients.length + 1;
 
+    gymClients.push({
+        id: nextId,
+        name: name,
+        plan: plan,
+        isPaid: true,
+    });
+    console.log(`Cliente ${name} adicionado com sucesso.`);
+}
 listClients();
-
+addClient('Roni', 'silver')
 findClient(4);
+console.log(gymClients)
+addClient('Maria', 'gold');
+listClients();
+console.log(gymClients)
