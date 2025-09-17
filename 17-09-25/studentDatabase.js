@@ -3,7 +3,7 @@ const students = [
     name: "Maicon Douglas",
     age: 23,
     course: "NodeJs",
-    grade: 84,
+    grade: 55,
     introduce() {
       console.log(
         `Aluno: ${this.name}. Idade: ${this.age} anos. Curso: ${this.course}`
@@ -12,58 +12,66 @@ const students = [
   },
 ];
 
-function addStudent(name, age, course, grade) {
-  return students.push({
-    name: name,
-    age: age,
-    course: course,
-    grade: grade,
+function createStudent(name, age, course, grade) {
+  return {
+    name,
+    age,
+    course,
+    grade,
     introduce() {
       console.log(
         `Aluno: ${this.name}. Idade: ${this.age} anos. Curso: ${this.course}`
-      );
-    },
-  });
+      )
+    }
+  };
 }
 
-addStudent('Roni', 31, 'NodeJs', 97);
-addStudent('Fulano', 20, 'NodeJs', 30);
-
-
-function getStudents(list) {
-    for (let i = 0; i < list.length; i++) {
-        students[i].introduce();
-    }
+function listStudents(list) {
+  console.log('------ Estudantes Cadastrados ------');
+  for(student of list) {
+    student.introduce();
+  }
 };
 
-getStudents(students);
-
-function calculateMedia(list) {
-    let total = 0;
-    let cycles = 0;
-    for(n of list) {
-        cycles++
-        total += n.grade;
-    }
-    return total / cycles;
+function calculateAverage(studentList) {
+  let total = 0;
+  for (student of studentList) {
+    total += student.grade;
+  }
+  return total / studentList.length;
 }
 
-console.log(calculateMedia(students));
-
-function setFinalConcept(learners) {
-    const approvedStudents = []
-    for (learner of learners) {
-        if (learner.grade >= 60) {
-            console.log(`${learner.name} está: APROVADO`);
-            approvedStudents.push(learner);
-        } else if (learner.grade >= 40){
-            console.log(`${learner.name} está: RECUPERAÇÃO`);
-        } else {
-            console.log(`${learner.name} está: REPROVADO`);
-        }
+function displayFinalStatus(students) {
+  let status = '';
+  console.log('------ Situação Final dos Alunos ------');
+  for (student of students) {
+    if (student.grade >= 60) {
+      status = 'Aprovado';
+    } else if (student.grade >= 40) {
+      status = 'Recuperação';
+    } else {
+      status = 'Reprovado';
     }
+    console.log(`A situação do estudante ${student.name} é: ${status.toUpperCase()}`);
+  } 
+};
 
-    return approvedStudents;
+function filterApprovedStudents(studentList) {
+  let approved = [];
+  console.log('------ Abaixo os alunos aprovados: ------')
+  for (student of studentList) {
+    if (student.grade >= 60) {
+      approved.push(student);
+    }
+  }
+  
+  return approved;
 }
 
-console.log(setFinalConcept(students))
+const student1 = createStudent('Roni', 31, 'NodeJs', 97);
+const student2 = createStudent('Fulano', 20, 'NodeJs', 30);
+students.push(student1, student2);
+listStudents(students);
+console.log(`A média da turma é: ${calculateAverage(students).toFixed(2)}`);
+displayFinalStatus(students);
+console.log(filterApprovedStudents(students));
