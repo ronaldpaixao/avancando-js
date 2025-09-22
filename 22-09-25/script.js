@@ -90,4 +90,3 @@ const order = {
 };
 
 console.log(`O cliente ${order.client.name} fez um pedido. O primeiro item do pedido é: ${order.client.items[0]}.`);
-
